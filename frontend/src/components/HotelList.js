@@ -1,42 +1,64 @@
-
 import React, { useEffect, useState } from 'react';
-import api from '../services/api';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const HotelList = () => {
   const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Cargar hoteles desde la API
-    api.get('/hotels')
+    axios
+      .get('http://localhost:8000/api/hotels')
       .then((response) => {
         setHotels(response.data);
-        setLoading(false);
       })
       .catch((error) => {
         console.error('Error al cargar los hoteles:', error);
-        setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>Cargando hoteles...</p>;
-
   return (
-    <div>
+    <div className="hotel-list">
       <h1>Lista de Hoteles</h1>
-      <ul>
-        {hotels.map((hotel) => (
-          <li key={hotel.id}>
-            <h2>{hotel.name}</h2>
-            <p>{hotel.address}, {hotel.city}</p>
-            <p><strong>NIT:</strong> {hotel.nit}</p>
-            <p><strong>Máximo de habitaciones:</strong> {hotel.max_rooms}</p>
-          </li>
-        ))}
-      </ul>
+      {hotels.length === 0 ? (
+        <p>No hay hoteles registrados.</p>
+      ) : (
+        <ul className="hotel-list-ul">
+          {hotels.map((hotel) => (
+            <li key={hotel.id} className="hotel-item">
+              <h3>{hotel.name}</h3>
+              <p>📍 Dirección: {hotel.address}</p>
+              <p>🏙️ Ciudad: {hotel.city}</p>
+              <p>🆔 NIT: {hotel.nit}</p>
+              <p>🛏️ Habitaciones máximas: {hotel.max_rooms}</p>
+
+              <Link to={`/hotel/${hotel.id}/config`}>
+                <button className="config-button">Configurar Habitaciones</button>
+              </Link>
+
+              <Link to={`/hotel/${hotel.id}/add-accommodation`}>
+                <button className="accommodation-button">Registrar Acomodación</button>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
 
 export default HotelList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,114 @@
+/* Estilos generales para la lista de hoteles */
+.hotel-list {
+  font-family: 'Arial', sans-serif;
+  background-color: #e3e2f3;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+/* Título de la lista */
+.hotel-list h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo de la lista */
+.hotel-list-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.hotel-item {
+  background-color: #cdccec;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hotel-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Detalles de cada hotel */
+.hotel-item h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.hotel-item p {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+/* Botón de Configurar Habitaciones */
+.config-button {
+  background-color: #6765fc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.config-button:hover {
+  background-color: #100cee;
+}
+
+/* Botón de Registrar Acomodación */
+.accommodation-button {
+  background-color: #100cee;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.accommodation-button:hover {
+  background-color: #6765fc;
+}
+
+/* Para dispositivos móviles */
+@media (max-width: 768px) {
+  .hotel-item {
+    padding: 10px;
+  }
+
+  .hotel-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .hotel-item p {
+    font-size: 0.9rem;
+  }
+
+  .config-button, .accommodation-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+
+  
+  
+  
+
