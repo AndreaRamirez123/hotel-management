@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HotelList />} />
+        <Route path="/hotels" element={<HotelList />} />
         <Route path="/add-hotel" element={<HotelForm />} />
         <Route path="/hotel/:hotelId/configure-rooms" element={<RoomConfigForm />} />
         <Route path="/hotel/:hotelId/add-accommodation" element={<AccommodationForm />} /> 

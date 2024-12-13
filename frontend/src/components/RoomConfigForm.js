@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const RoomConfigForm = () => {
@@ -7,11 +7,25 @@ const RoomConfigForm = () => {
   const [numRooms, setNumRooms] = useState('');
   const [accommodationType, setAccommodationType] = useState('');
   const [roomType, setRoomType] = useState('');
+  const [hotelInfo, setHotelInfo] = useState({}); // Estado para almacenar la información del hotel
+
+  const getHotelInfo = async () => {
+    axios
+      .get(`http://localhost:8000/api/hotels/${hotelId}`)
+      .then((response) => {
+        // console.log('informacion recibida.', response.data);
+        setHotelInfo(response.data.hotel_info);
+      })
+      .catch((error) => {
+        console.log('Error al consultar informacion del hotel.');
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8000/api/hotel-configuration/${hotelId}`, {
+      .post(`http://localhost:8000/api/accommodations`, {
+        hotelId,
         numRooms,
         accommodationType,
         roomType,
@@ -24,12 +38,21 @@ const RoomConfigForm = () => {
       });
   };
 
+  useEffect(() => {
+    getHotelInfo();
+  }, [])
+
   return (
     <div className="config-form-container">
       {/* Cargar el archivo CSS desde la carpeta public */}
       <link rel="stylesheet" href="/RoomConfigForm.css" />
-
-      <h1>Configuración del Hotel {hotelId}</h1>
+      <Link to='/hotels'>Volver</Link>
+      <h1>Configuración de acomodaciones</h1>
+      <p>
+        <strong>Hotel: </strong> {hotelInfo.name}<br/>
+        <strong>Ubicación: </strong> {hotelInfo.city}, {hotelInfo.address}<br/>
+        <strong>Habitaciones: </strong> {hotelInfo.max_rooms}
+      </p>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Cantidad de habitaciones</label>

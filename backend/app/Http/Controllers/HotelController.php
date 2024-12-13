@@ -15,6 +15,15 @@ class HotelController extends Controller
         return response()->json($hotels); // Devuelve la respuesta en formato JSON
     }
 
+    // Obtener información del hotel por su id
+    public function getHotelById(String $id) {
+        $hotel = Hotel::where(["id" => $id])->with('accommodations', function($q) {
+            $q->with('roomType');
+            $q->with('accommodationType');
+        })->first(); // Obtiene el hotel por el id indicado
+        return response()->json(["hotel_info" => $hotel, "id" => $id]); // Devuelve la respuesta en formato JSON
+    }
+
     // Crear un nuevo hotel
     public function createHotel(Request $request) {
         // Validar los datos (opcional)
@@ -40,6 +49,15 @@ class HotelController extends Controller
             "status" => 200,
             "message" => "Hotel creado con éxito",
             "hotel" => $hotel
+        ]);
+    }
+
+    // Guardar acomodación del hotel
+    public function saveAccommodation(Request $request) {
+        return response()->json([
+            "status" => 200,
+            "message" => "Respuesta desde el servicio expuesto en backend",
+            "hotel" => $request->all()
         ]);
     }
 }
