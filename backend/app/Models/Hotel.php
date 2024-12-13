@@ -10,7 +10,7 @@ class Hotel extends Model
 {
     use HasFactory;
 
-    // Definir los campos que pueden ser asignados masivamente
+    
     protected $fillable = ['name', 'address', 'city', 'nit', 'max_rooms'];
 
     public function accommodations(): HasMany

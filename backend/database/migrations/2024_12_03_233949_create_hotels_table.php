@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Schema;
 class CreateHotelsTable extends Migration
 {
     /**
-     * Ejecutar las migraciones.
      *
      * @return void
      */

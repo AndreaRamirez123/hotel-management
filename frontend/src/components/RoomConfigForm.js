@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const RoomConfigForm = () => {
-  const { hotelId } = useParams(); // Obtén el hotelId desde la URL
+  const { hotelId } = useParams(); 
   const [numRooms, setNumRooms] = useState('');
   const [accommodationType, setAccommodationType] = useState('');
   const [roomType, setRoomType] = useState('');
-  const [hotelInfo, setHotelInfo] = useState({}); // Estado para almacenar la información del hotel
+  const [hotelInfo, setHotelInfo] = useState({}); 
 
   const getHotelInfo = async () => {
     axios
@@ -44,7 +44,7 @@ const RoomConfigForm = () => {
 
   return (
     <div className="config-form-container">
-      {/* Cargar el archivo CSS desde la carpeta public */}
+
       <link rel="stylesheet" href="/RoomConfigForm.css" />
       <Link to='/hotels'>Volver</Link>
       <h1>Configuración de acomodaciones</h1>

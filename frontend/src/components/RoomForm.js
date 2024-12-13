@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './RoomForm.css'; // Asegúrate de crear estilos o eliminar esta línea si no tienes un archivo CSS
+import './RoomForm.css'; 
 
 const RoomForm = () => {
-    const { hotelId } = useParams(); // Capturar el ID del hotel desde la URL
+    const { hotelId } = useParams(); 
     const [roomType, setRoomType] = useState('');
     const [capacity, setCapacity] = useState('');
     const [price, setPrice] = useState('');
