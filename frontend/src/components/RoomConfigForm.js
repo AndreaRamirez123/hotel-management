@@ -1,48 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';  // Importa useParams para obtener el ID del hotel
 
 const RoomConfigForm = () => {
-  const { hotelId } = useParams();  // Obtén el ID del hotel de la URL
-  const [hotelData, setHotelData] = useState({});
-  const [rooms, setRooms] = useState(0);
+  const { hotelId } = useParams(); // Obtén el hotelId desde la URL
+  const [numRooms, setNumRooms] = useState('');
+  const [accommodationType, setAccommodationType] = useState('');
+  const [roomType, setRoomType] = useState('');
 
-  useEffect(() => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     axios
-      .get(`http://localhost:8000/api/hotels/${hotelId}`)
+      .post(`http://localhost:8000/api/hotel-configuration/${hotelId}`, {
+        numRooms,
+        accommodationType,
+        roomType,
+      })
       .then((response) => {
-        setHotelData(response.data);
-        setRooms(response.data.max_rooms);  // Establece el valor inicial para las habitaciones
+        alert('Configuración guardada con éxito.');
       })
       .catch((error) => {
-        console.error('Error al cargar los datos del hotel:', error);
+        alert('Error al guardar la configuración.');
       });
-  }, [hotelId]);
-
-  const handleRoomSubmit = (e) => {
-    e.preventDefault();
-    // Aquí manejarás el envío de la configuración de habitaciones
-    console.log('Configuración de habitaciones:', rooms);
-    // Podrías enviar estos datos al backend para actualizar la configuración de las habitaciones
   };
 
   return (
-    <div className="room-config">
-      <h1>Configuración de Habitaciones {hotelData.name}</h1>
-      <form onSubmit={handleRoomSubmit}>
+    <div className="config-form-container">
+      {/* Cargar el archivo CSS desde la carpeta public */}
+      <link rel="stylesheet" href="/RoomConfigForm.css" />
+
+      <h1>Configuración del Hotel {hotelId}</h1>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Cantidad de Habitaciones:</label>
+          <label>Cantidad de habitaciones</label>
           <input
             type="number"
-            value={rooms}
-            onChange={(e) => setRooms(e.target.value)}
+            value={numRooms}
+            onChange={(e) => setNumRooms(e.target.value)}
+            placeholder="Ejemplo: 10"
             required
           />
         </div>
-        <button type="submit" className="submit-button">Guardar Configuración</button>
+        <div className="form-group">
+          <label>Tipo de acomodación</label>
+          <select
+            value={accommodationType}
+            onChange={(e) => setAccommodationType(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Selecciona una opción
+            </option>
+            <option value="individual">Individual</option>
+            <option value="doble">Doble</option>
+            <option value="suite">Suite</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Tipo de habitación</label>
+          <select
+            value={roomType}
+            onChange={(e) => setRoomType(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Selecciona una opción
+            </option>
+            <option value="estándar">Estándar</option>
+            <option value="lujo">Lujo</option>
+            <option value="familiar">Familiar</option>
+          </select>
+        </div>
+        <button type="submit">Guardar configuración</button>
       </form>
     </div>
   );
 };
 
 export default RoomConfigForm;
+

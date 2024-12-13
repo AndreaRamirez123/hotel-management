@@ -31,8 +31,11 @@ const HotelList = () => {
               <p>🆔 NIT: {hotel.nit}</p>
               <p>🛏️ Habitaciones máximas: {hotel.max_rooms}</p>
 
-              <Link to={`/hotel/${hotel.id}/config`}>
+              <Link to={`/hotel/${hotel.id}/configure-rooms`}>
                 <button className="config-button">Configurar Habitaciones</button>
+              </Link>
+
+              <Link to="/add-hotel">
               </Link>
 
               <Link to={`/hotel/${hotel.id}/add-accommodation`}>

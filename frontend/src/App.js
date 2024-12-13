@@ -11,14 +11,17 @@ function App() {
       <Routes>
         <Route path="/" element={<HotelList />} />
         <Route path="/add-hotel" element={<HotelForm />} />
-        <Route path="/hotel/:hotelId/config" element={<RoomConfigForm />} />
-        <Route path="/hotel/:hotelId/config" element={<AccommodationForm />} /> {/* Ruta para acomodaciones */}
+        <Route path="/hotel/:hotelId/configure-rooms" element={<RoomConfigForm />} />
+        <Route path="/hotel/:hotelId/add-accommodation" element={<AccommodationForm />} /> 
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
+
 
 
 

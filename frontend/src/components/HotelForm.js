@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HotelForm = () => {
   const [name, setName] = useState('');
@@ -7,6 +8,9 @@ const HotelForm = () => {
   const [city, setCity] = useState('');
   const [nit, setNit] = useState('');
   const [maxRooms, setMaxRooms] = useState('');
+  
+  // Inicializa useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +24,8 @@ const HotelForm = () => {
       })
       .then((response) => {
         console.log(response.data);
-        // Redirigir o realizar acción luego del envío exitoso
+        // Redirigir a la lista de hoteles
+        navigate('/');
       })
       .catch((error) => {
         console.error('Error al agregar el hotel!', error);
@@ -83,3 +88,5 @@ const HotelForm = () => {
 };
 
 export default HotelForm;
+
+
